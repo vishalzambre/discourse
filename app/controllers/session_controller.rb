@@ -15,32 +15,34 @@ class SessionController < ApplicationController
     end
   end
 
-  def sso_login
-    unless SiteSetting.enable_sso
-      render nothing: true, status: 404
-      return
-    end
+  # def sso_login
+  #   unless SiteSetting.enable_sso
+  #     render nothing: true, status: 404
+  #     return
+  #   end
+  #   p "--------------#{request.query_string}"
+  #   p "----------123"
+  #   sso = DiscourseSingleSignOn.parse(request.query_string)
+  #   p "------------------#{sso}"
+  #   if !sso.nonce_valid?
+  #     render text: "Timeout expired, please try logging in again.", status: 500
+  #     return
+  #   end
 
-    sso = DiscourseSingleSignOn.parse(request.query_string)
-    if !sso.nonce_valid?
-      render text: "Timeout expired, please try logging in again.", status: 500
-      return
-    end
+  #   return_path = sso.return_path
+  #   sso.expire_nonce!
 
-    return_path = sso.return_path
-    sso.expire_nonce!
-
-    if user = sso.lookup_or_create_user
-      if SiteSetting.must_approve_users? && !user.approved?
-        # TODO: need an awaiting approval message here
-      else
-        log_on_user user
-      end
-      redirect_to return_path
-    else
-      render text: "unable to log on user", status: 500
-    end
-  end
+  #   if user = sso.lookup_or_create_user
+  #     if SiteSetting.must_approve_users? && !user.approved?
+  #       # TODO: need an awaiting approval message here
+  #     else
+  #       log_on_user user
+  #     end
+  #     redirect_to return_path
+  #   else
+  #     render text: "unable to log on user", status: 500
+  #   end
+  # end
 
   def create
 

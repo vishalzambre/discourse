@@ -21,11 +21,11 @@ required:
     default: ''
     type: email
   notification_email:
-    default: 'info@discourse.org'
+    default: 'vishal.zambre@weboniselab.com'
     type: email
   site_contact_username:
     default: ''
-    type: username
+    type: vishalzambre
   logo_url:
     client: true
     default: '/images/d-logo-sketch.png'
