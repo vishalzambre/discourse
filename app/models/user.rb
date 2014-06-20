@@ -105,6 +105,15 @@ class User < ActiveRecord::Base
 
   GLOBAL_USERNAME_LENGTH_RANGE = 3..15
 
+
+  def set_group(ids)
+    p "--------------#{ids.split(',')}"
+    grps = Group.where(id: ids.split(','))
+    p "--------in model--------#{grps.inspect}"
+    self.groups << grps
+    self.save
+  end
+
   def self.username_length
     if SiteSetting.enforce_global_nicknames
       GLOBAL_USERNAME_LENGTH_RANGE

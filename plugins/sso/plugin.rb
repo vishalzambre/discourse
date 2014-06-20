@@ -52,7 +52,12 @@ module DiscourseSSO
           user.password = SecureRandom.hex if user.password.blank?
           user.save
           user.activate
-          user.groups << user_groups
+
+          p "---------------#{group}"
+          p "--------------#{user_groups.inspect}"
+          p "------before ---------#{user.groups.inspect}"
+          user.set_group(group)
+          p "------after ---------#{user.groups.inspect}"
         end
         log_on_user(user)
         return
