@@ -16,7 +16,13 @@
       margin-top: 10px;
     }
   }
+  .title {
+    a {
+      position:relative;
+    }
+  }
 }
+
 
 /* needs to be global, used in user-drop down and user page too */
 .unread-private-messages {

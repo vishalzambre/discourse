@@ -26,7 +26,11 @@
     }
 
     #site-logo {
-      max-height: 40px;
+      /*max-height: 40px;*/
+       left: 0;
+    max-height: 79px;
+    position: absolute;
+    top: -14px
     }
 
     .fa-home {
