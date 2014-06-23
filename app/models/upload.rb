@@ -76,9 +76,9 @@ class Upload < ActiveRecord::Base
       if FileHelper.is_image?(filename)
         begin
           # retrieve image info
-          image_info = FastImage.new(file, raise_on_failure: true)
+          image_info = FastImage.new(file, raise_on_failure: true) if (filename =~ /\.pdf$/i).nil?
             # compute image aspect ratio
-          upload.width, upload.height = ImageSizer.resize(*image_info.size)
+          upload.width, upload.height = ImageSizer.resize(*image_info.size) if (filename =~ /\.pdf$/i).nil?
           # make sure we're at the beginning of the file (FastImage moves the pointer)
           file.rewind
         rescue FastImage::ImageFetchFailure
