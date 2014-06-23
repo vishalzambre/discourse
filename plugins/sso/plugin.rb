@@ -22,8 +22,6 @@ module DiscourseSSO
         userid, group, ts, signature = sso.split(':')
         return if (secret != signature)
 
-        # return if group is not present
-        user_groups = Group.where(id: group)
         # quit if the timestamp is too far off
         tdiff = ts.to_i - Time.now.to_i
         return if tdiff.abs > 180
@@ -53,11 +51,7 @@ module DiscourseSSO
           user.save
           user.activate
 
-          p "---------------#{group}"
-          p "--------------#{user_groups.inspect}"
-          p "------before ---------#{user.groups.inspect}"
           user.set_group(group)
-          p "------after ---------#{user.groups.inspect}"
         end
         log_on_user(user)
         return

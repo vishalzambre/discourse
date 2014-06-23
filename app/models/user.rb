@@ -106,10 +106,8 @@ class User < ActiveRecord::Base
   GLOBAL_USERNAME_LENGTH_RANGE = 3..15
 
 
-  def set_group(ids)
-    p "--------------#{ids.split(',')}"
-    grps = Group.where(id: ids.split(','))
-    p "--------in model--------#{grps.inspect}"
+  def set_group(names)
+    grps = Group.where(name: names.split(','))
     self.groups << grps
     self.save
   end
